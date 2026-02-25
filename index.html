@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITECH | Premium Tech Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#111;
+color:white;
+}
+
+header{
+background:linear-gradient(90deg,#8B0000,#B22222);
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+color:gold;
+letter-spacing:2px;
+}
+
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+font-weight:500;
+}
+
+.hero{
+height:80vh;
+background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f');
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero h1{
+font-size:50px;
+color:gold;
+}
+
+.hero p{
+margin:20px 0;
+font-size:18px;
+}
+
+.btn{
+background:gold;
+color:#111;
+padding:12px 25px;
+border:none;
+font-weight:600;
+cursor:pointer;
+border-radius:30px;
+transition:0.3s;
+}
+
+.btn:hover{
+background:#ffcc00;
+transform:scale(1.05);
+}
+
+.products{
+padding:60px 8%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.card{
+background:#1a1a1a;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.5);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+.card h3{
+margin:15px 0 10px;
+color:gold;
+}
+
+.price{
+font-weight:600;
+margin-bottom:10px;
+}
+
+footer{
+background:#8B0000;
+text-align:center;
+padding:20px;
+margin-top:50px;
+}
+
+#loader{
+position:fixed;
+width:100%;
+height:100vh;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+z-index:9999;
+animation:fadeOut 1.5s ease forwards;
+animation-delay:3s;
+}
+
+.logo-loader{
+/* width:500px; */
+z-index:2;
+animation:logoGlow 2s ease-in-out infinite alternate;
+width:60vw;
+max-width:700px;
+}
+
+.burst{
+position:absolute;
+width:300px;
+height:300px;
+background:radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0.4) 40%, transparent 70%);
+border-radius:50%;
+animation:burstAnim 3s ease-out forwards;
+}
+
+@keyframes burstAnim{
+0%{transform:scale(0.5); opacity:1;}
+100%{transform:scale(3); opacity:0;}
+}
+
+@keyframes logoGlow{
+0%{filter:drop-shadow(0 0 5px gold);}
+100%{filter:drop-shadow(0 0 25px gold);}
+}
+
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+
+
+</style>
+</head>
+
+<body>
+
+    <div id="loader">
+    <div class="burst"></div>
+    <img src="logo.png" class="logo-loader">
+</div>
+
+<header>
+
+<div class="logo">ITECH</div>
+<nav>
+<a href="#">Home</a>
+<a href="./product.html">Products</a>
+<a href="./contact.html">Contact</a>
+</nav>
+</header>
+
+<section class="hero">
+<div>
+<h1>Premium Tech Solutions</h1>
+<p>High Quality Digital Products & Smart Technology Tools</p>
+<a href="./product.html"><button class="btn">Shop Now</button></a>
+</div>
+</section>
+
+<section class="products" id="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3">
+<h3>ICAL Calculator</h3>
+<p class="price">₦9,000</p>
+<a href="https://wa.me/2349162249670?text=Hello%20I%20want%20to%20buy%20the%20ICAL%20Calculator">
+<button class="btn">Buy Now</button>
+</a>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
+<h3>Programming Course</h3>
+<p class="price">₦150,000</p>
+<a href="https://wa.me/2349162249670?text=Hello%20I%20am%20interested%20in%20your%20Programming%20Course">
+<button class="btn">Buy Now</button>
+</a>
+</div>
+
+
+</section>
+
+<footer id="contact">
+<p>© 2026 ITECH. All Rights Reserved.</p>
+<p>WhatsApp: 2349162249670</p>
+</footer>
+
+<script>
+    window.addEventListener("load", function(){
+setTimeout(function(){
+document.getElementById("loader").style.display = "none";
+}, 3000); // 3 seconds
+});
+
+window.addEventListener("load", function(){
+setTimeout(function(){
+document.getElementById("loader").style.display = "none";
+}, 4500);
+});
+
+
+
+</script>
+</body>

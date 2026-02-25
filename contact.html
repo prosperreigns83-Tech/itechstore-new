@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact ITECH</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#111;color:white;}
+
+header{
+background:linear-gradient(90deg,#8B0000,#B22222);
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:26px;
+font-weight:700;
+color:gold;
+}
+
+nav a{
+color:white;
+margin-left:20px;
+text-decoration:none;
+}
+
+.container{
+padding:60px 8%;
+max-width:1100px;
+margin:auto;
+}
+
+h1{
+color:gold;
+margin-bottom:30px;
+text-align:center;
+}
+
+.contact-wrapper{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+input,textarea{
+padding:12px;
+border:none;
+border-radius:8px;
+}
+
+button{
+background:gold;
+color:#111;
+padding:12px;
+border:none;
+border-radius:25px;
+font-weight:600;
+cursor:pointer;
+}
+
+button:hover{
+background:#ffcc00;
+}
+
+.info{
+line-height:1.8;
+}
+
+iframe{
+width:100%;
+height:250px;
+border-radius:10px;
+margin-top:20px;
+}
+
+footer{
+background:#8B0000;
+text-align:center;
+padding:20px;
+margin-top:50px;
+}
+
+/* Floating WhatsApp */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:22px;
+text-decoration:none;
+}
+
+@media(max-width:768px){
+.contact-wrapper{
+grid-template-columns:1fr;
+}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">ITECH</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="contact.html">Contact</a>
+<a href="product.html">Products</a>
+</nav>
+</header>
+
+<div class="container">
+<h1>Contact Us</h1>
+
+<div class="contact-wrapper">
+
+<form onsubmit="sendMessage(event)">
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="email" id="email" placeholder="Your Email" required>
+<textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+
+<div class="info">
+<p><strong>Email:</strong> prosperreigns@gmail.com</p>
+<p><strong>Phone:</strong> 2349162249670</p>
+<p><strong>Location:</strong> Lagos, Nigeria</p>
+
+<iframe 
+src="https://maps.google.com/maps?q=Lagos,Nigeria&t=&z=13&ie=UTF8&iwloc=&output=embed">
+</iframe>
+
+<div style="margin-top:20px;">
+<p>Follow Us:</p>
+<a href="https://www.tiktok.com/@prosper_emonis1" style="color:gold;">TikTok</a> |
+<a href="https://www.instagram.com/@prosperrmonis90" style="color:gold;">Instagram</a> |
+<a href="#" style="color:gold;">Facebook</a>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/2349162249670" target="_blank">💬</a>
+
+<footer>
+© 2026 ITECH. All Rights Reserved.
+</footer>
+
+<script>
+function sendMessage(event){
+event.preventDefault();
+
+let name = document.getElementById("name").value;
+let email = document.getElementById("email").value;
+let message = document.getElementById("message").value;
+
+let fullMessage = `Hello ITECH,%0AName: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
+
+window.open(`https://wa.me/2349162249670?text=${fullMessage}`);
+}
+</script>
+
+</body>
