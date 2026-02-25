@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ITECH | Premium Tech Store</title>
@@ -75,11 +76,16 @@ font-size:18px;
 width:90%;
 }
 
-.products{
+/* .products{
 grid-template-columns:1fr;
 padding:20px;
-}
+} */
 
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
 .card{
 padding:15px;
 }
@@ -188,6 +194,33 @@ body.dark-mode #themeToggle{
 background:gold;
 color:black;
 } */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 20px;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+}
+button {
+  padding: 12px;
+  font-size: 16px;
+}
 
 </style>
 </head>
@@ -309,10 +342,11 @@ let productListData = [
 {name:"fan", price:10000, category:"fan", imgFile:"f7.jpg", desc:"cooling fast."},
 {name:"fan", price:10000, category:"fan", imgFile:"f8.jpg", desc:"cooling fast."},
 {name:"fan", price:10000, category:"fan", imgFile:"f9.jpg", desc:"cooling fast."},
-{name:"fan", price:10000, category:"fan", imgFile:"f10.jpg", desc:"cooling fast."},
 {name:"fan", price:10000, category:"fan", imgFile:"f11.jpg", desc:"cooling fast."},
-{name:"fan", price:10000, category:"fan", imgFile:"f12.jpg", desc:"cooling fast."},
 {name:"fan", price:10000, category:"fan", imgFile:"f13.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", imgFile:"f14.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", imgFile:"f15.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", imgFile:"f16.jpg", desc:"cooling fast."},
 {name:"fan", price:10000, category:"fan", imgFile:"f17.jpg", desc:"cooling fast."},
 
 ];
