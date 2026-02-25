@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITECH | Products</title>
+<style>
+    body{
+margin:0;
+font-family:Arial;
+background:#111;
+color:white;
+}
+
+.main-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+background:#8B0000;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+color:gold;
+}
+
+.header-search{
+width:40%;
+padding:10px;
+border-radius:25px;
+border:none;
+}
+
+.nav-icons a{
+color:white;
+text-decoration:none;
+margin-left:15px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:30px 8%;
+}
+
+.card{
+background:#1a1a1a;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+button{
+background:gold;
+color:black;
+border:none;
+padding:10px;
+border-radius:20px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#ffcc00;
+}
+
+.cart-page{
+padding:40px 8%;
+}
+
+.cart-item{
+margin-bottom:10px;
+border-bottom:1px solid #333;
+padding-bottom:5px;
+}
+
+@media(max-width:768px){
+.header-search{
+width:100%;
+margin:10px 0;
+}
+.main-header{
+flex-direction:column;
+align-items:flex-start;
+}
+}
+
+.nav-icons a{
+color:white;
+text-decoration:none;
+margin-left:15px;
+font-size:30px;
+}
+
+.nav-icons span{
+background:gold;
+color:black;
+padding:2px 6px;
+border-radius:50%;
+font-size:15px;
+}
+
+ body.light-mode{
+background:white;
+color:#f2f2f2;
+}
+
+body.light-mode .card{
+background:#f2f2f2;
+color:black;
+} 
+
+body.dark-mode .sidebar{
+background-color:rgb(210, 24, 24) !important;
+color:#292424 !important;
+}
+body.dark-mode input{
+    
+background:#333;
+color:white;
+border:1px solid #555;
+}
+.menu-btn{
+background:none;
+border:none;
+font-size:22px;
+color:white;
+cursor:pointer;
+margin-right:10px;
+}
+
+.sidebar{
+position:fixed;
+left:-250px;
+top:0;
+width:250px;
+height:100%;
+background:#1a1a1a;
+padding:20px;
+transition:0.3s;
+z-index:2000;
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar h3{
+color:gold;
+margin-bottom:15px;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar ul li{
+padding:10px 0;
+cursor:pointer;
+border-bottom:1px solid #333;
+}
+
+.sidebar ul li:hover{
+color:gold;
+}
+
+.sidebar button{
+width:100%;
+margin-top:20px;
+}
+
+
+/* LIGHT MODE */
+body.light-mode{
+background:white;
+color:#222;
+}
+
+body.light-mode .card{
+background:#f5f5f5;
+color:#222;
+}
+
+body.light-mode .sidebar{
+background:#ffffff;
+color:#222;
+border-right:1px solid #ddd;
+}
+
+body.light-mode .sidebar ul li{
+border-bottom:1px solid #ddd;
+}
+
+body.light-mode .main-header{
+background:#f5f5f5;
+color:#222;
+}
+
+body.light-mode .menu-btn{
+color:#222;
+}
+</style>
+</head>
+<body>
+
+<header class="main-header">
+    
+  <div class="logo">ITECH</div>
+
+  <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()" class="header-search">
+
+  <div class="nav-icons">
+    <a href="index.html">🏠</a>
+    <a href="products.html">🛍</a>
+    <a href="cart.html">🛒 <span id="cartCount">0</span></a>
+  </div>
+  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+</header>
+<div class="sidebar" id="sidebar">
+  <h3>Categories</h3>
+  <ul>
+    <li onclick="filterProducts('all')">All</li>
+    <li onclick="filterProducts('light')">Lights</li>
+    <li onclick="filterProducts('laptop')">Laptops</li>
+   <li onclick="filterProducts('fan')">Fans</li>
+    <li onclick="filterProducts('accessories')">Accessories</li>
+    <li onclick="filterProducts('mp3')">MP3s</li>
+<li onclick="filterCategory('software')">Software</li>
+<li onclick="filterCategory('home')">Home Appliances</li>
+<li onclick="filterCategory('fashion')">Fashion</li>
+  </ul>
+
+  <hr>
+<button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+</div>
+
+<section class="products" id="products"></section>
+
+<script>
+    let productList = [
+{name:"Laptop", price:500000,category:"laptop", img:"images/lap1.png"},
+{name:"Fan", price:10000, category:"fan",img:"images/fan.png"},
+{name:"Speaker", price:40000,category:"mp3", img:"images/mp31.jpg"},
+{name:"fan", price:10000, category:"fan", img:"images/f1.jpg", desc:"cooling fast."},
+
+{name:"fan", price:10000, category:"fan", img:"images/f1.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f2.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f3.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f4.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f5.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f6.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f7.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f8.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f9.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f11.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f13.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f14.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f15.jpg", desc:"cooling fast."},
+{name:"fan", price:10000, category:"fan", img:"images/f16.jpg", desc:"cooling fast."},
+
+
+
+
+
+{name:"Laptop", price:500000, category:"laptop", img:"images/lap2.png", desc:"Good Laptop."},
+{name:"Speaker", price:40000, category:"mp3", img:"images/mp31.jpg", desc:"Good sound."},
+{name:"Laptop", price:700000, category:"laptop", img:"images/lap1.png", desc:""},
+{name:"Laptop", price:250000, category:"laptop", img:"images/lap6.jpg", desc:"Professional website design."},
+{name:"fan", price:10000, category:"fan", img:"images/fan.png", desc:"cooling fast."},
+{name:"Fast fan", price:12000, category:"fan", img:"images/fan1.png", desc:"Good for hot seasons"},
+
+{name:"Online courses", price:150000, category:"laptop", img:"images/pro1.jpg", desc:"learn programming"},
+
+{name:"Online courses", price:150000, category:"laptop", img:"images/pro2.jpg", desc:"learn programming"},
+
+
+{name:"Solar Light", price:12000, category:"light", img:"images/light2.png", desc:"Solar rechargable light."},
+{name:"Laptop", price:250000, category:"laptop", img:"images/lap1.png", desc:"Awesome new product."},
+
+
+
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e1.jpg", desc:"Feel the sound of joy"},
+
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e2.jpg", desc:"Feel the sound of joy"},
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e3.jpg", desc:"Feel the sound of joy"},
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e4.jpg", desc:"Feel the sound of joy"},
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e5.jpg", desc:"Feel the sound of joy"},
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e6.jpg", desc:"Feel the sound of joy"},
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e7.jpg", desc:"Feel the sound of joy"},
+{name:"Earbuds", price:10000, category:"mp3", img:"images/e8.png", desc:"Feel the sound of joy"},
+{name:"Headphones", price:10000, category:"mp3", img:"images/h1.jpg", desc:"Feel the sound of joy"},
+{name:"Headphones", price:10000, category:"mp3", img:"images/h2.jpg", desc:"Feel the sound of joy"},
+{name:"Headphones", price:10000, category:"mp3", img:"images/h3.jpg", desc:"Feel the sound of joy"},
+{name:"Headphones", price:10000, category:"mp3", img:"images/h4.jpg", desc:"Feel the sound of joy"},
+
+
+{name:"Power Bank", price:250000, category:"accessories", img:"images/p5.jpg", desc:"Awesome new product."},
+{name:"Power Bank", price:250000, category:"accessories", img:"images/p1.jpg", desc:"Awesome new product."},
+{name:"Power Bank", price:250000, category:"accessories", img:"images/p2.jpg", desc:"Awesome new product."},
+{name:"Power Bank", price:250000, category:"accessories", img:"images/p3.jpg", desc:"Awesome new product."},
+{name:"Power Bank", price:250000, category:"accessories", img:"images/p4.jpg", desc:"Awesome new product."},
+
+{name:"Fast Charger", price:7000, category:"accessories", img:"images/c1.jpg", desc:"Awesome new product with the fast charger."},
+{name:"Fast Charger", price:7000, category:"accessories", img:"images/c2.jpg", desc:"Awesome new product with the fast charger."},
+
+{name:"Fast Charger", price:7000, category:"accessories", img:"images/c3.jpg", desc:"Awesome new product with the fast charger."},
+
+{name:"Fast Charger", price:7000, category:"accessories", img:"images/c4.jpg", desc:"Awesome new product with the fast charger."},
+
+{name:"Fast Charger", price:7000, category:"accessories", img:"images/c5.png", desc:"Awesome new product with the fast charger."},
+
+{name:"Fast Charger", price:7000, category:"accessories", img:"images/c6.jpg", desc:"Awesome new product with the fast charger."},
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function displayProducts(){
+let container=document.getElementById("products");
+container.innerHTML="";
+
+productList.forEach((p,index)=>{
+container.innerHTML+=`
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+<p class="price">₦${p.price}</p>
+<button onclick="addToCart(${index})">Add to Cart</button>
+</div>
+`;
+});
+}
+
+function addToCart(index){
+cart.push(productList[index]);
+localStorage.setItem("cart",JSON.stringify(cart));
+updateCartCount();
+alert("Added to cart!");
+}
+
+function updateCartCount(){
+document.getElementById("cartCount").innerText=cart.length;
+}
+
+function searchProducts(){
+let input=document.getElementById("searchInput").value.toLowerCase();
+let container=document.getElementById("products");
+container.innerHTML="";
+
+productList.forEach((p,index)=>{
+if(p.name.toLowerCase().includes(input)){
+container.innerHTML+=`
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+<p class="price">₦${p.price}</p>
+<button onclick="addToCart(${index})">Add to Cart</button>
+</div>
+`;
+}
+});
+}
+
+displayProducts();
+updateCartCount();
+
+function toggleSidebar(){
+document.getElementById("sidebar").classList.toggle("active");
+}
+
+function filterProducts(category){
+let container=document.getElementById("products");
+container.innerHTML="";
+
+productList.forEach((p,index)=>{
+if(category==="all" || p.category===category){
+container.innerHTML+=`
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+<p class="price">₦${p.price}</p>
+<button onclick="addToCart(${index})">Add to Cart</button>
+</div>
+`;
+}
+});
+}
+
+
+function toggleTheme(){
+document.body.classList.toggle("light-mode");
+
+if(document.body.classList.contains("light-mode")){
+localStorage.setItem("theme","light");
+}else{
+localStorage.setItem("theme","dark");
+}
+}
+
+if(localStorage.getItem("theme")==="light"){
+document.body.classList.add("light-mode");
+}
+
+
+function toggleTheme(){
+let body = document.body;
+let btn = document.getElementById("themeBtn");
+
+body.classList.toggle("light-mode");
+
+if(body.classList.contains("light-mode")){
+localStorage.setItem("theme","light");
+btn.innerHTML = "🌙 Dark Mode";
+}else{
+localStorage.setItem("theme","dark");
+btn.innerHTML = "☀ Light Mode";
+}
+}
+
+/* Load saved theme on refresh */
+document.addEventListener("DOMContentLoaded", function(){
+let savedTheme = localStorage.getItem("theme");
+let btn = document.getElementById("themeBtn");
+
+if(savedTheme === "light"){
+document.body.classList.add("light-mode");
+btn.innerHTML = "🌙 Dark Mode";
+}else{
+btn.innerHTML = "☀ Light Mode";
+}
+});
+</script>
+</body>
+</html>
