@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ITECH | Products</title>
+
 <style>
     body{
 margin:0;
@@ -97,7 +98,7 @@ align-items:flex-start;
 color:white;
 text-decoration:none;
 margin-left:15px;
-font-size:30px;
+font-size:15px;
 }
 
 .nav-icons span{
@@ -208,25 +209,173 @@ color:#222;
 body.light-mode .menu-btn{
 color:#222;
 }
+
+
+body.light-mode a{
+background:#f2f2f2;
+color:rgb(0, 0, 0);
+} 
+/* Shake Animation */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.card:hover {
+  animation: shake 0.3s ease-in-out;
+}
+
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.image-modal img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+  animation: zoomIn 0.3s ease;
+}
+
+.image-modal span {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 25px;
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
+
+
+
+
+
+/* ============================= */
+/* PRODUCT CARD ANIMATION */
+/* ============================= */
+
+.card {
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+}
+
+/* ============================= */
+/* IMAGE MODAL */
+/* ============================= */
+
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-modal img {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.prev { left: 40px; }
+.next { right: 40px; }
+
+
+#splashScreen{
+  position: fixed;
+  width:100%;
+  height:100vh;
+  background:#111;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:5000;
+}
+
+#splashScreen img{
+  width:120px;
+  animation: fadeZoom 1.5s ease;
+}
+
+@keyframes fadeZoom{
+  from{opacity:0; transform:scale(0.7);}
+  to{opacity:1; transform:scale(1);}
+}
 </style>
 </head>
 <body>
-
+<!-- Splash Screen -->
+<!-- <div id="splashScreen">
+  <img src="logo.png" alt="ITECH Logo">
+</div> -->
 <header class="main-header">
     
   <div class="logo">ITECH</div>
-
-  <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()" class="header-search">
+<!-- 
+  <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()" class="header-search"> -->
 
   <div class="nav-icons">
-    <a href="index.html">🏠</a>
-    <a href="products.html">🛍</a>
-    <a href="cart.html">🛒 <span id="cartCount">0</span></a>
+    <a href="index.html">🏠Home</a>
+    <a href="products.html">🛍 Products</a>
+    <a href="cart.html" title="CART">🛒Cart <span id="cartCount">0</span></a>
+     <a href="account.html">Account</a>
   </div>
-  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()" class="header-search">
+
+  <button class="menu-btn" onclick="toggleSidebar()" title="VIEW CATEGORIES">☰</button>
 </header>
 <div class="sidebar" id="sidebar">
-  <h3>Categories</h3>
+  <h3>Categories 
+  <button class="menu-btn" onclick="toggleSidebar()" title="GO BACK">☰</button></h3>
   <ul>
     <li onclick="filterProducts('all')">All</li>
     <li onclick="filterProducts('light')">Lights</li>
@@ -330,7 +479,8 @@ container.innerHTML="";
 productList.forEach((p,index)=>{
 container.innerHTML+=`
 <div class="card">
-<img src="${p.img}">
+    <img src="${p.img}" onclick="openImageModal('${p.img}')">
+
 <h3>${p.name}</h3>
 <p class="price">₦${p.price}</p>
 <button onclick="addToCart(${index})">Add to Cart</button>
@@ -437,6 +587,120 @@ btn.innerHTML = "🌙 Dark Mode";
 btn.innerHTML = "☀ Light Mode";
 }
 });
+
+
+
+
+
+// function openImageModal(src){
+// let modal = document.getElementById("imageModal");
+// let img = document.getElementById("modalImage");
+// img.src = src;
+// modal.style.display = "flex";
+// }
+
+// function closeImageModal(){
+// document.getElementById("imageModal").style.display = "none";
+// }
+
+
+let currentImageIndex = 0;
+let currentImages = [];
+let zoomLevel = 1;
+
+function openImageModal(src) {
+  const modal = document.getElementById("imageModal");
+  const img = document.getElementById("modalImage");
+
+  currentImages = Array.from(document.querySelectorAll(".card img"))
+                      .map(i => i.src);
+
+  currentImageIndex = currentImages.indexOf(src);
+
+  img.src = src;
+  modal.style.display = "flex";
+  zoomLevel = 1;
+  img.style.transform = "scale(1)";
+}
+
+function closeImageModal() {
+  document.getElementById("imageModal").style.display = "none";
+}
+
+function changeImage(direction) {
+  currentImageIndex += direction;
+
+  if (currentImageIndex < 0)
+    currentImageIndex = currentImages.length - 1;
+
+  if (currentImageIndex >= currentImages.length)
+    currentImageIndex = 0;
+
+  document.getElementById("modalImage").src =
+    currentImages[currentImageIndex];
+
+  zoomLevel = 1;
+  document.getElementById("modalImage").style.transform = "scale(1)";
+}
+
+/* ESC key close */
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape") closeImageModal();
+});
+
+/* Click outside to close */
+document.getElementById("imageModal")
+.addEventListener("click", function(e){
+  if(e.target === this) closeImageModal();
+});
+
+/* Double click zoom */
+document.getElementById("modalImage")
+.addEventListener("dblclick", function(){
+  zoomLevel = zoomLevel === 1 ? 2 : 1;
+  this.style.transform = `scale(${zoomLevel})`;
+});
+
+/* Mouse wheel zoom */
+document.getElementById("modalImage")
+.addEventListener("wheel", function(e){
+  e.preventDefault();
+  zoomLevel += e.deltaY * -0.001;
+  zoomLevel = Math.min(Math.max(.5, zoomLevel), 3);
+  this.style.transform = `scale(${zoomLevel})`;
+});
+
+/* Swipe support (mobile) */
+let touchStartX = 0;
+
+document.getElementById("modalImage")
+.addEventListener("touchstart", e => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+document.getElementById("modalImage")
+.addEventListener("touchend", e => {
+  let touchEndX = e.changedTouches[0].screenX;
+  if(touchEndX < touchStartX - 50) changeImage(1);
+  if(touchEndX > touchStartX + 50) changeImage(-1);
+});
 </script>
+<!-- Image Zoom Modal -->
+<!-- <div id="imageModal" class="image-modal">
+  <span onclick="closeImageModal()">✖</span>
+  <img id="modalImage"> -->
+
+  <!-- Image Modal -->
+<div id="imageModal" class="image-modal">
+  <span class="close-btn" onclick="closeImageModal()">✖</span>
+
+  <button class="nav-btn prev" onclick="changeImage(-1)">❮</button>
+  <img id="modalImage">
+  <button class="nav-btn next" onclick="changeImage(1)">❯</button>
+</div>
+</div>
+
+<!-- <script src="./auth.js"></script> -->
+<script src="./authGuard.js"></script>
 </body>
 </html>

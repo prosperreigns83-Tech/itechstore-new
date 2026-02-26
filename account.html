@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ITECH | Account</title>
+ <script src="auth.js"></script> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;padding:0;font-family:'Poppins',sans-serif;background:#111;color:white;}
+header{background:linear-gradient(90deg,#8B0000,#B22222);padding:20px;display:flex;justify-content:space-between;align-items:center;}
+.logo{font-size:26px;font-weight:700;color:gold;}
+nav a{color:white;margin-left:20px;text-decoration:none;}
+nav a:hover{color:gold;}
+.container{max-width:800px;margin:auto;padding:40px 20px;}
+h1,h2{color:gold;margin-bottom:20px;}
+input,textarea,button{width:100%;padding:12px;margin-bottom:15px;border-radius:10px;border:none;font-size:16px;}
+button{background:gold;color:#111;font-weight:bold;cursor:pointer;}
+button:hover{background:#ffcc00;}
+body.dark-mode{background:#fff;color:#111;}
+body.dark-mode header{background:#8B0000;}
+body.dark-mode input,body.dark-mode textarea{background:#f1f1f1;color:#111;}
+body.dark-mode button{background:#111;color:gold;}
+#themeToggle{position: sticky;height:90px;width:90px;padding:10px 15px;border:none;border-radius:20px;cursor:pointer;background:black;color:white;font-weight:bold;z-index:1000;}
+body.dark-mode #themeToggle{background:gold;color:black;}
+
+
+
+#splashScreen{
+  position: fixed;
+  width:100%;
+  height:100vh;
+  background:#111;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:5000;
+}
+
+#splashScreen img{
+  width:120px;
+  animation: fadeZoom 1.5s ease;
+}
+
+@keyframes fadeZoom{
+  from{opacity:0; transform:scale(0.7);}
+  to{opacity:1; transform:scale(1);}
+}
+</style>
+</head>
+<!-- Splash Screen -->
+<!-- <div id="splashScreen">
+  <img src="logo.png" alt="ITECH Logo">
+</div> -->
+<body>
+
+<header>
+  <button id="themeToggle">🌙 Dark Mode</button>
+  <div class="logo">ITECH</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="account.html">Account</a>
+  </nav>
+  <div id="userGreeting" style="margin-left:20px;font-weight:bold;"></div>
+</header>
+
+<div class="container">
+<h1>Account</h1>
+
+<!-- Registration -->
+<div id="registerSection">
+<h2>Register</h2>
+<input type="text" id="regName" placeholder="Your Name">
+<input type="email" id="regEmail" placeholder="Email">
+<input type="password" id="regPass" placeholder="Password">
+<button onclick="registerUser()">Register</button>
+<p>Already registered? <a href="#" onclick="toggleSections('login')">Login here</a></p>
+</div>
+
+<!-- Login -->
+<div id="loginSection" style="display:none;">
+<h2>Login</h2>
+<input type="email" id="loginEmail" placeholder="Email">
+<input type="password" id="loginPass" placeholder="Password">
+<button onclick="loginUser()">Login</button>
+<p>Don't have an account? <a href="#" onclick="toggleSections('register')">Register here</a></p>
+</div>
+
+<!-- Contact Form -->
+<div id="contactSection">
+<h2>Contact Us</h2>
+<input type="text" id="name" placeholder="Your Name">
+<input type="email" id="email" placeholder="Your Email">
+<textarea id="message" rows="5" placeholder="Your Message"></textarea>
+<button onclick="sendMessage()">Send via WhatsApp</button>
+</div>
+</div>
+
+<script>
+// ===== Dark Mode =====
+const toggleBtn = document.getElementById("themeToggle");
+if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode"); toggleBtn.innerHTML="☀ Light Mode";}
+toggleBtn.addEventListener("click",function(){
+  document.body.classList.toggle("dark-mode");
+  if(document.body.classList.contains("dark-mode")){localStorage.setItem("theme","dark"); toggleBtn.innerHTML="☀ Light Mode";}
+  else{localStorage.setItem("theme","light"); toggleBtn.innerHTML="🌙 Dark Mode";}
+});
+
+// ===== Sections Toggle =====
+function toggleSections(section){
+  document.getElementById("registerSection").style.display=section==="register"?"block":"none";
+  document.getElementById("loginSection").style.display=section==="login"?"block":"none";
+}
+
+// ===== Users in localStorage =====
+function registerUser(){
+  const name=document.getElementById("regName").value;
+  const email=document.getElementById("regEmail").value;
+  const pass=document.getElementById("regPass").value;
+  if(!name||!email||!pass){alert("Fill all fields"); return;}
+  let users=JSON.parse(localStorage.getItem("users")||"[]");
+  if(users.some(u=>u.email===email)){alert("Email already registered"); return;}
+  users.push({name,email,pass});
+  localStorage.setItem("users",JSON.stringify(users));
+  alert("Registered successfully!");
+  toggleSections('login');
+}
+
+// ===== Login =====
+function loginUser(){
+  const email=document.getElementById("loginEmail").value;
+  const pass=document.getElementById("loginPass").value;
+  let users=JSON.parse(localStorage.getItem("users")||"[]");
+  const user=users.find(u=>u.email===email && u.pass===pass);
+  if(user){alert("Login successful!"); displayGreeting(user.name);}
+  else alert("Invalid email or password");
+  localStorage.setItem(
+  "loggedInUser",
+  JSON.stringify({ name: user.name, email: user.email })
+);
+}
+
+function displayGreeting(name){
+  const greet=document.getElementById("userGreeting");
+  greet.innerHTML=`Welcome, ${name}! <button onclick="logout()">Logout</button>`;
+  document.getElementById("registerSection").style.display="none";
+  document.getElementById("loginSection").style.display="none";
+}
+
+function logout(){
+  document.getElementById("userGreeting").innerHTML="";
+  toggleSections('login');
+}
+
+// ===== Contact Form WhatsApp =====
+function sendMessage(){
+  const name=document.getElementById("name").value;
+  const email=document.getElementById("email").value;
+  const msg=document.getElementById("message").value;
+  if(!name||!email||!msg){alert("Fill all fields"); return;}
+  const text=`Hello ITECH,%0A%0AName: ${name}%0AEmail: ${email}%0AMessage: ${msg}`;
+  window.open(`https://wa.me/2349162249670?text=${text}`,'_blank');
+}
+window.onload = function(){
+  const loggedIn = JSON.parse(localStorage.getItem("loggedInUser"));
+  
+  if(loggedIn){
+    displayGreeting(loggedIn.name);
+  }
+};
+</script>
+
+</body>
+</html>

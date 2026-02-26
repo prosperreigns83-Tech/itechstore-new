@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact ITECH</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
+<script src="auth.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{background:#111;color:white;}
@@ -110,17 +110,26 @@ text-decoration:none;
 grid-template-columns:1fr;
 }
 }
+
+
+body.dark-mode{background:#fff;color:#111;}
+body.dark-mode header{background:#8B0000;}
+body.dark-mode .contact-form input, body.dark-mode .contact-form textarea{background:#f1f1f1;color:#111;}
+body.dark-mode .contact-form button{background:#111;color:gold;}
+#themeToggle{position:fixed;top:20px;right:20px;padding:10px 15px;border:none;border-radius:20px;cursor:pointer;background:black;color:white;font-weight:bold;z-index:1000;}
+body.dark-mode #themeToggle{background:gold;color:black;}
 </style>
 </head>
 
 <body>
 
 <header>
+    <button id="themeToggle">🌙 Dark Mode</button>
 <div class="logo">ITECH</div>
 <nav>
 <a href="index.html">Home</a>
 <a href="contact.html">Contact</a>
-<a href="product.html">Products</a>
+<a href="products.html">Products</a>
 </nav>
 </header>
 
@@ -175,6 +184,19 @@ let fullMessage = `Hello ITECH,%0AName: ${name}%0AEmail: ${email}%0AMessage: ${m
 
 window.open(`https://wa.me/2349162249670?text=${fullMessage}`);
 }
+// Dark / Light Mode
+const toggleBtn = document.getElementById("themeToggle");
+if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode"); toggleBtn.innerHTML="☀ Light Mode";}
+toggleBtn.addEventListener("click",function(){
+  document.body.classList.toggle("dark-mode");
+  if(document.body.classList.contains("dark-mode")){
+    localStorage.setItem("theme","dark");
+    toggleBtn.innerHTML="☀ Light Mode";
+  }else{
+    localStorage.setItem("theme","light");
+    toggleBtn.innerHTML="🌙 Dark Mode";
+  }
+});
 </script>
 
 </body>

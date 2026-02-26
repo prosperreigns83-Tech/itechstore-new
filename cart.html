@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ITECH | Cart</title>
+<script src="auth.js"></script>
 <style>
     body{
 margin:0;
@@ -156,6 +157,141 @@ window.open(`https://wa.me/2349162249670?text=${message}`);
 }
 
 displayCart();
+
+// Get current logged-in user
+function getCurrentUser() {
+  const loggedIn = JSON.parse(localStorage.getItem('loggedInUser'));
+  return loggedIn; // {name,email}
+}
+
+// Save cart for current user
+function saveCart(cart) {
+  const user = getCurrentUser();
+  if (!user) return;
+  let allCarts = JSON.parse(localStorage.getItem('userCarts') || '{}');
+  allCarts[user.email] = cart;
+  localStorage.setItem('userCarts', JSON.stringify(allCarts));
+}
+
+// Load cart for current user
+function loadCart() {
+  const user = getCurrentUser();
+  if (!user) return [];
+  const allCarts = JSON.parse(localStorage.getItem('userCarts') || '{}');
+  return allCarts[user.email] || [];
+}
+
+// Add to cart
+function addToCart(name, price) {
+  const user = getCurrentUser();
+  if (!user) { alert('Please login first'); toggleSections('login'); return; }
+  cart.push({name, price});
+  updateCart();
+}
+
+// Update Cart UI
+function updateCart() {
+  let ci = document.getElementById("cartItems"); let total = 0; ci.innerHTML = "";
+  cart.forEach((item,i)=>{total+=item.price; ci.innerHTML += `<div class="cart-item">${item.name} - ₦${item.price} <button onclick="removeItem(${i})">Remove</button></div>`;});
+  document.getElementById("totalPrice").innerText = total;
+  document.getElementById("cartCount").innerText = cart.length;
+  saveCart(cart); // Save cart for user
+}
+
+// Remove item
+function removeItem(i){ cart.splice(i,1); updateCart(); }
+
+// On login, load user cart
+function loginUser(){
+  const email = document.getElementById("loginEmail").value;
+  const pass = document.getElementById("loginPass").value;
+  let users = JSON.parse(localStorage.getItem("users")||"[]");
+  const user = users.find(u=>u.email===email && u.pass===pass);
+  if(user){
+    localStorage.setItem('loggedInUser', JSON.stringify({name:user.name,email:user.email}));
+    displayGreeting(user.name);
+    cart = loadCart();  // Load their cart
+    updateCart();
+  } else alert("Invalid email or password");
+}
+
+// Logout
+function logout(){
+  localStorage.removeItem('loggedInUser');
+  document.getElementById("userGreeting").innerHTML="";
+  cart=[]; updateCart();
+  toggleSections('login');
+}
+
+
+
+
+
+
+// Get current logged-in user
+function getCurrentUser() {
+  const loggedIn = JSON.parse(localStorage.getItem('loggedInUser'));
+  return loggedIn; // {name,email}
+}
+
+// Save cart for current user
+function saveCart(cart) {
+  const user = getCurrentUser();
+  if (!user) return;
+  let allCarts = JSON.parse(localStorage.getItem('userCarts') || '{}');
+  allCarts[user.email] = cart;
+  localStorage.setItem('userCarts', JSON.stringify(allCarts));
+}
+
+// Load cart for current user
+function loadCart() {
+  const user = getCurrentUser();
+  if (!user) return [];
+  const allCarts = JSON.parse(localStorage.getItem('userCarts') || '{}');
+  return allCarts[user.email] || [];
+}
+
+// Add to cart
+function addToCart(name, price) {
+  const user = getCurrentUser();
+  if (!user) { alert('Please login first'); toggleSections('login'); return; }
+  cart.push({name, price});
+  updateCart();
+}
+
+// Update Cart UI
+function updateCart() {
+  let ci = document.getElementById("cartItems"); let total = 0; ci.innerHTML = "";
+  cart.forEach((item,i)=>{total+=item.price; ci.innerHTML += `<div class="cart-item">${item.name} - ₦${item.price} <button onclick="removeItem(${i})">Remove</button></div>`;});
+  document.getElementById("totalPrice").innerText = total;
+  document.getElementById("cartCount").innerText = cart.length;
+  saveCart(cart); // Save cart for user
+}
+
+// Remove item
+function removeItem(i){ cart.splice(i,1); updateCart(); }
+
+// On login, load user cart
+function loginUser(){
+  const email = document.getElementById("loginEmail").value;
+  const pass = document.getElementById("loginPass").value;
+  let users = JSON.parse(localStorage.getItem("users")||"[]");
+  const user = users.find(u=>u.email===email && u.pass===pass);
+  if(user){
+    localStorage.setItem('loggedInUser', JSON.stringify({name:user.name,email:user.email}));
+    displayGreeting(user.name);
+    cart = loadCart();  // Load their cart
+    updateCart();
+  } else alert("Invalid email or password");
+}
+
+// Logout
+function logout(){
+  localStorage.removeItem('loggedInUser');
+  document.getElementById("userGreeting").innerHTML="";
+  cart=[]; updateCart();
+  toggleSections('login');
+}
 </script>
 </body>
 </html>
