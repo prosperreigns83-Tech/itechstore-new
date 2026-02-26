@@ -367,7 +367,6 @@ color:rgb(0, 0, 0);
     <a href="index.html">🏠Home</a>
     <a href="products.html">🛍 Products</a>
     <a href="cart.html" title="CART">🛒Cart <span id="cartCount">0</span></a>
-     <a href="account.html">Account</a>
   </div>
   <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()" class="header-search">
 
@@ -390,6 +389,9 @@ color:rgb(0, 0, 0);
 
   <hr>
 <button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+<button onclick="window.location.href='account.html'">
+  Login
+</button>
 </div>
 
 <section class="products" id="products"></section>
@@ -468,6 +470,33 @@ color:rgb(0, 0, 0);
 {name:"Fast Charger", price:7000, category:"accessories", img:"images/c5.png", desc:"Awesome new product with the fast charger."},
 
 {name:"Fast Charger", price:7000, category:"accessories", img:"images/c6.jpg", desc:"Awesome new product with the fast charger."},
+
+
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp1.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp2.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp3.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp4.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp5.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp6.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp7.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp8.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp9.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp10.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp11.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp12.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp13.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp14.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp15.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp16.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp17.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp18.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp6.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp11.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp21.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/mp22.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/a16.jpg", desc:"Awesome new product."},
+{name:"Bluetooth Speaker", price:25000, category:"mp3", img:"images/a15.jpg", desc:"Awesome new product."},
+
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
