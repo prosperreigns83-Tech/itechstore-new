@@ -138,6 +138,16 @@ cursor:pointer;
 margin-right:10px;
 }
 
+
+.menu-btns{
+background:none;
+border:none;
+font-size:22px;
+color:white;
+cursor:pointer;
+margin-right:10px;
+text-align: left;
+}
 .sidebar{
 position:fixed;
 left:-250px;
@@ -350,6 +360,66 @@ color:rgb(0, 0, 0);
   from{opacity:0; transform:scale(0.7);}
   to{opacity:1; transform:scale(1);}
 }
+
+.call{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 15%;
+background:gold;
+}
+
+.order{
+  font-size:30px;
+font-weight:bold;
+color:#f2f2f2;
+}
+
+
+.divider{
+  text-align: center;
+  position: relative;
+  margin: 30px 0;
+}
+.divider::before,
+.divider::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 2px;
+  background: #ffffff;
+
+}
+.divider::before{
+  left: 0;
+}
+.divider::after{
+  right: 0;
+}
+
+
+.divid{
+  text-align: center;
+  position: relative;
+  margin: 30px 0;
+}
+.divid::before,
+.divid::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10%;
+  height: 2px;
+  background: #ffffff;
+
+}
+.divid::before{
+  left: 0;
+}
+.divid::after{
+  right: 0;
+}
 </style>
 </head>
 <body>
@@ -359,7 +429,7 @@ color:rgb(0, 0, 0);
 </div> -->
 <header class="main-header">
     
-  <div class="logo">ITECH</div>
+  <div class="logo">ITECH-STORE</div>
 <!-- 
   <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()" class="header-search"> -->
 
@@ -368,13 +438,17 @@ color:rgb(0, 0, 0);
     <a href="products.html">🛍 Products</a>
     <a href="cart.html" title="CART">🛒Cart <span id="cartCount">0</span></a>
   </div>
-  <input type="text" id="searchInput" placeholder="🔍 Search products..." onkeyup="searchProducts()" class="header-search">
+  <input type="text" id="searchInput" placeholder="🔍 Search on ITECH..." onkeyup="searchProducts()" class="header-search">
 
   <button class="menu-btn" onclick="toggleSidebar()" title="VIEW CATEGORIES">☰Categories</button>
 </header>
+<section class="call">
+  <div class="order">Call to order:09162249670</div>
+</section>
 <div class="sidebar" id="sidebar">
   <h3>Categories 
-  <button class="menu-btn" onclick="toggleSidebar()" title="GO BACK">☰Go Back</button></h3>
+  <button class="menu-btns" onclick="toggleSidebar()" title="GO BACK">☰Go Back</button></h3>
+   <h2 class="divid">Velw Categories</h2>
   <ul>
     <li onclick="filterProducts('all')">All</li>
     <li onclick="filterProducts('light')">Lights</li>
@@ -386,8 +460,10 @@ color:rgb(0, 0, 0);
 <li onclick="filterCategory('home')">Home Appliances</li>
 <li onclick="filterCategory('fashion')">Fashion</li>
   </ul>
-
-  <hr>
+    <h2 class="divider">Setting</h2>
+    <ul><li onclick="filterCategory('software')">Payment Methods</li>
+<li onclick="filterCategory('home')">Help and supports</li>
+<li onclick="filterCategory('fashion')">Live chat🗨️</li></ul>
 <button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
 <button onclick="window.location.href='account.html'">
   Login
