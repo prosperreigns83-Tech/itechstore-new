@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ITECH | Account</title>
+<link rel="stylesheet" href="style.css">
  <script src="auth.js"></script> 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -17,12 +18,12 @@ h1,h2{color:gold;margin-bottom:20px;}
 input,textarea,button{width:100%;padding:12px;margin-bottom:15px;border-radius:10px;border:none;font-size:16px;}
 button{background:gold;color:#111;font-weight:bold;cursor:pointer;}
 button:hover{background:#ffcc00;}
-body.dark-mode{background:#fff;color:#111;}
+/* body.dark-mode{background:#fff;color:#111;}
 body.dark-mode header{background:#8B0000;}
 body.dark-mode input,body.dark-mode textarea{background:#f1f1f1;color:#111;}
 body.dark-mode button{background:#111;color:gold;}
 #themeToggle{position: sticky;height:90px;width:90px;padding:10px 15px;border:none;border-radius:20px;cursor:pointer;background:black;color:white;font-weight:bold;z-index:1000;}
-body.dark-mode #themeToggle{background:gold;color:black;}
+body.dark-mode #themeToggle{background:gold;color:black;} */
 
 
 
@@ -55,7 +56,7 @@ body.dark-mode #themeToggle{background:gold;color:black;}
 <body>
 
 <header>
-  <button id="themeToggle">🌙 Dark Mode</button>
+  <!-- <button id="themeToggle">🌙 Dark Mode</button> -->
   <div class="logo">ITECH-STORE</div>
   <nav>
     <a href="index.html">Home</a>
@@ -99,13 +100,13 @@ body.dark-mode #themeToggle{background:gold;color:black;}
 
 <script>
 // ===== Dark Mode =====
-const toggleBtn = document.getElementById("themeToggle");
-if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode"); toggleBtn.innerHTML="☀ Light Mode";}
-toggleBtn.addEventListener("click",function(){
-  document.body.classList.toggle("dark-mode");
-  if(document.body.classList.contains("dark-mode")){localStorage.setItem("theme","dark"); toggleBtn.innerHTML="☀ Light Mode";}
-  else{localStorage.setItem("theme","light"); toggleBtn.innerHTML="🌙 Dark Mode";}
-});
+// const toggleBtn = document.getElementById("themeToggle");
+// if(localStorage.getItem("theme")==="dark"){document.body.classList.add("dark-mode"); toggleBtn.innerHTML="☀ Light Mode";}
+// toggleBtn.addEventListener("click",function(){
+//   document.body.classList.toggle("dark-mode");
+//   if(document.body.classList.contains("dark-mode")){localStorage.setItem("theme","dark"); toggleBtn.innerHTML="☀ Light Mode";}
+//   else{localStorage.setItem("theme","light"); toggleBtn.innerHTML="🌙 Dark Mode";}
+// });
 
 // ===== Sections Toggle =====
 function toggleSections(section){
@@ -170,6 +171,6 @@ window.onload = function(){
   }
 };
 </script>
-
+ <script src="theme.js"></script>
 </body>
 </html>

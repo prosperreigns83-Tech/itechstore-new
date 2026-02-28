@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ITECH | Products</title>
-
+<link rel="stylesheet" href="style.css">
 <style>
     body{
 margin:0;
@@ -55,7 +55,7 @@ text-align:center;
 }
 
 .card img{
-width:100%;
+width:50%;
 border-radius:10px;
 }
 
@@ -158,6 +158,14 @@ background:#1a1a1a;
 padding:20px;
 transition:0.3s;
 z-index:2000;
+
+
+  
+  color: white;
+  overflow-x: auto;  /* sidebar scroll */
+
+  flex-shrink: 0; /* Prevent sidebar from shrinking */
+
 }
 
 .sidebar.active{
@@ -420,6 +428,29 @@ color:#f2f2f2;
 .divid::after{
   right: 0;
 }
+
+.chat{
+  .whatsapp-chat{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+.whatsapp-chat:hover{
+  background: #1ebe5d;
+}
+}
+
+
+
+
+
 </style>
 </head>
 <body>
@@ -462,9 +493,15 @@ color:#f2f2f2;
   </ul>
     <h2 class="divider">Setting</h2>
     <ul><li onclick="filterCategory('software')">Payment Methods</li>
-<li onclick="filterCategory('home')">Help and supports</li>
-<li onclick="filterCategory('fashion')">Live chat🗨️</li></ul>
-<button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+<li onclick="window.location.href='support.html'">Help and supports</li>
+  <li class="chat"><a href="https://wa.me/2349162249670" class="whatsapp-chat" target="_blank"> 
+   💬 Live Chat
+</a></li>
+</ul>
+<button id="themeToggleBtn" onclick="toggleTheme()">
+  Dark Mode
+</button>
+<!-- <button id="themeBtn" onclick="toggleTheme()">🌙 Dark Mode</button> -->
 <button onclick="window.location.href='account.html'">
   Login
 </button>
@@ -650,35 +687,35 @@ container.innerHTML+=`
 }
 
 
-function toggleTheme(){
-document.body.classList.toggle("light-mode");
+// function toggleTheme(){
+// document.body.classList.toggle("light-mode");
 
-if(document.body.classList.contains("light-mode")){
-localStorage.setItem("theme","light");
-}else{
-localStorage.setItem("theme","dark");
-}
-}
+// if(document.body.classList.contains("light-mode")){
+// localStorage.setItem("theme","light");
+// }else{
+// localStorage.setItem("theme","dark");
+// }
+// }
 
-if(localStorage.getItem("theme")==="light"){
-document.body.classList.add("light-mode");
-}
+// if(localStorage.getItem("theme")==="light"){
+// document.body.classList.add("light-mode");
+// }
 
 
-function toggleTheme(){
-let body = document.body;
-let btn = document.getElementById("themeBtn");
+// function toggleTheme(){
+// let body = document.body;
+// let btn = document.getElementById("themeBtn");
 
-body.classList.toggle("light-mode");
+// body.classList.toggle("light-mode");
 
-if(body.classList.contains("light-mode")){
-localStorage.setItem("theme","light");
-btn.innerHTML = "🌙 Dark Mode";
-}else{
-localStorage.setItem("theme","dark");
-btn.innerHTML = "☀ Light Mode";
-}
-}
+// if(body.classList.contains("light-mode")){
+// localStorage.setItem("theme","light");
+// btn.innerHTML = "🌙 Dark Mode";
+// }else{
+// localStorage.setItem("theme","dark");
+// btn.innerHTML = "☀ Light Mode";
+// }
+// }
 
 /* Load saved theme on refresh */
 document.addEventListener("DOMContentLoaded", function(){
@@ -806,6 +843,7 @@ document.getElementById("modalImage")
 </div>
 
 <!-- <script src="./auth.js"></script> -->
+ <script src="theme.js"></script>
 <script src="./authGuard.js"></script>
 </body>
 </html>
